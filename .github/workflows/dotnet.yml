@@ -44,3 +44,25 @@ jobs:
         file: ./DemoCICD/Dockerfile
         push: true
         tags: quynguyen96/democicdapp:${{ steps.vars.outputs.tag }}
+  cd:
+    runs-on: ubuntu-latest
+    needs: ci
+    steps:
+      - name: Checkout CD repo
+        uses: actions/checkout@v4
+        with:
+          repository: quynguyen96/.NETDemoCICD-cd
+          token: ${{ secrets.GH_TOKEN }}
+          path: cd-repo
+      - name: Update image tag
+        run: |
+          cd cd-repo/deployment
+          sed -i "s/tag:.*/tag: ${{ needs.ci.outputs.image_tag }}/" values-dev.yaml
+      - name: Commit and push
+        run: |
+          cd cd-repo
+          git config user.name "quynguyen96"
+          git config user.email "quynguyen96.dev@gmail.com"
+          git add .
+          git commit -m "Update image tag to ${{ needs.ci.outputs.image_tag }}"
+          git push
