@@ -1,0 +1,6 @@
+services:
+  democicd:
+    image: ${DOCKER_REGISTRY-}democicd
+    build:
+      context: .
+      dockerfile: DemoCICD/Dockerfile
