@@ -40,6 +40,6 @@ jobs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
       with:
-        context: DemoCICD/Dockerfile
+        context: ./DemoCICD/Dockerfile
         push: true
         tags: quynguyen96/democicdapp:${{ steps.vars.outputs.tag }}
