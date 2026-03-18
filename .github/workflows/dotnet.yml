@@ -25,12 +25,18 @@ jobs:
         
     - name: Restore dependencies
       run: dotnet restore
+      with:
+        sln-path: DemoCICD.sln
       
     - name: Build
       run: dotnet build --no-restore
+      with:
+        sln-path: DemoCICD.sln
       
     - name: Test
       run: dotnet test --no-build --verbosity normal
+      with:
+        sln-path: DemoCICD.sln
 
     # Login Docker Hub
     - name: Login Docker Hub
