@@ -10,7 +10,7 @@ namespace DemoCICD.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok("Welcome!");
+            return Ok("Welcome to demo");
         }
     }
 }
