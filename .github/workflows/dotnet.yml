@@ -68,6 +68,7 @@ jobs:
         run: |
           cd cd-repo/deployment
           sed -i "s/tag:.*/tag: ${{ needs.ci.outputs.image_tag }}/" values-dev.yaml
+          sed -i "/worker:/,/tag:/ s/tag:.*/tag: ${{ needs.ci.outputs.image_tag }}/" values-dev.yaml
       - name: Commit and push
         run: |
           cd cd-repo
